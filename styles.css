@@ -50,50 +50,68 @@ button { font-family: inherit; }
   overflow: hidden;
   min-height: 100vh;
   padding: var(--gutter);
-  display: flex;
-  flex-direction: column;
   background: var(--color-bg);
 }
 
 .hero__bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 .hero__bg img { position: absolute; filter: grayscale(1) contrast(1.08); }
 
+/* Synth spans full width; its own white top strip sits behind the title */
 .hero__synth {
-  left: 50%;
-  bottom: -2%;
-  width: 128%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
   max-width: none;
-  transform: translateX(-50%);
-  opacity: 0.92;
 }
 .hero__violin {
-  right: -3%;
-  top: 2%;
-  height: 96%;
+  right: -2%;
+  top: 0;
+  height: 100%;
   width: auto;
 }
 .hero__cable {
-  left: -4%;
+  left: -3%;
   top: -2%;
-  width: 30%;
-  max-width: 360px;
+  width: 26%;
+  max-width: 320px;
   opacity: 0.9;
 }
 
-.hero__topbar {
+.hero__top {
   position: relative;
   z-index: 2;
   display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+.hero__title-block { max-width: 70%; }
+.hero__title {
+  font-size: clamp(46px, 7.6vw, 112px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+.hero__subtitle {
+  margin-top: 14px;
+  font-size: clamp(11px, 0.95vw, 14px);
+  color: var(--color-ink);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hero__controls {
+  display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 18px;
   font-size: 13px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
-.hero__info {
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s ease;
-}
+.hero__info { border-bottom: 1px solid transparent; transition: border-color 0.2s ease; }
 .hero__info:hover, .hero__info:focus-visible { border-color: var(--color-ink); }
 
 .lang-toggle {
@@ -104,27 +122,6 @@ button { font-family: inherit; }
 .lang-toggle.is-en [data-lang-option="en"],
 .lang-toggle:not(.is-en) [data-lang-option="fr"] { opacity: 1; font-weight: 700; }
 .lang-sep { opacity: 0.35; margin: 0 3px; }
-
-.hero__title-block {
-  position: relative;
-  z-index: 2;
-  margin-top: auto;
-  padding-bottom: 2vh;
-}
-.hero__title {
-  font-size: clamp(52px, 9vw, 132px);
-  font-weight: 800;
-  line-height: 0.92;
-  letter-spacing: -0.015em;
-  text-transform: uppercase;
-}
-.hero__subtitle {
-  margin-top: 20px;
-  font-size: clamp(12px, 1vw, 15px);
-  color: var(--color-ink);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
 
 /* ---------- Sticky nav ---------- */
 .site-nav {
