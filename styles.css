@@ -45,106 +45,30 @@ button { font-family: inherit; }
 .wrap { width: var(--content); margin-inline: auto; }
 
 /* ---------- Hero ---------- */
-.hero {
-  position: relative;
-  overflow: hidden;
-  background: var(--color-bg);
-}
-
-/* Synth is a static block that defines the hero height (fully visible, never cropped) */
-.hero__media { position: relative; z-index: 0; }
-.hero__synth {
-  display: block;
-  width: 100%;
-  height: auto;
-  filter: grayscale(1) contrast(1.08);
-}
-.hero__violin {
+/* Exact Figma composition, rendered from the source file as one scaling image */
+.hero { position: relative; background: var(--color-bg); line-height: 0; }
+.hero__img { display: block; width: 100%; height: auto; }
+/* Transparent hit area over the baked-in "INFO" label (top-right) */
+.hero__info-hit {
   position: absolute;
-  z-index: 1;
-  right: -1%;
-  top: 0;
-  height: 100%;
-  width: auto;
-  filter: grayscale(1) contrast(1.08);
-  pointer-events: none;
-}
-.hero__cable {
-  position: absolute;
+  top: 1%;
+  right: 0.4%;
+  width: 8%;
+  height: 8%;
   z-index: 2;
-  left: -2%;
-  top: -6%;
-  width: 19%;
-  max-width: 260px;
-  filter: grayscale(1) contrast(1.08);
-  pointer-events: none;
 }
 
-/* Title + INFO sit over the synth's white top strip */
-.hero__top {
+.sr-only {
   position: absolute;
-  z-index: 3;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: var(--gutter);
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 24px;
-}
-.hero__title-block { max-width: 70%; }
-.hero__title {
-  font-size: clamp(34px, 5.6vw, 92px);
-  font-weight: 800;
-  line-height: 0.95;
-  letter-spacing: -0.015em;
-  text-transform: uppercase;
-}
-.hero__subtitle {
-  margin-top: 12px;
-  font-size: clamp(10px, 0.9vw, 13px);
-  color: var(--color-ink);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.hero__controls {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  font-size: 13px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-.hero__info { border-bottom: 1px solid transparent; transition: border-color 0.2s ease; }
-.hero__info:hover, .hero__info:focus-visible { border-color: var(--color-ink); }
-
-/* Small logo mark below the synth, before the first project */
-.hero__logo {
-  position: relative;
-  z-index: 3;
-  padding: clamp(14px, 2vw, 26px) var(--gutter) clamp(24px, 4vw, 48px);
-}
-.hero__logo-name {
-  display: block;
-  font-weight: 700;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
-.hero__logo-role {
-  display: block;
-  margin-top: 4px;
-  font-size: 11px;
-  color: var(--color-ink);
-  letter-spacing: 0.02em;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0);
+  white-space: nowrap; border: 0;
 }
 
 .lang-toggle {
   background: none; border: none; color: inherit; cursor: pointer;
-  padding: 2px 0; font-size: 13px; letter-spacing: 0.06em;
+  padding: 2px 0; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
 }
 .lang-toggle span[data-lang-option] { opacity: 0.35; transition: opacity 0.2s ease; }
 .lang-toggle.is-en [data-lang-option="en"],
@@ -292,7 +216,14 @@ button { font-family: inherit; }
 .site-footer__deco { position: absolute; opacity: 0.5; filter: grayscale(1); pointer-events: none; }
 .site-footer__deco--synth { left: 50%; bottom: 0; width: 100%; transform: translateX(-50%); }
 .site-footer__deco--cable { right: -2%; bottom: -8%; width: 15vw; max-width: 190px; }
-.site-footer__copy { position: relative; z-index: 1; font-size: 12px; color: var(--color-muted); letter-spacing: 0.04em; }
+.site-footer__bar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.site-footer__copy { font-size: 12px; color: var(--color-muted); letter-spacing: 0.04em; }
 
 /* ---------- Back to top ---------- */
 .back-to-top {

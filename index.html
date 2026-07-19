@@ -13,30 +13,10 @@
 <a class="skip-link" href="#main">Skip to content</a>
 
 <header class="hero">
-  <img class="hero__violin" src="assets/img/header-collage-2.png" alt="" aria-hidden="true">
-
-  <div class="hero__top">
-    <div class="hero__title-block">
-      <h1 class="hero__title">Constantin<br>Ory-Lavollée</h1>
-      <p class="hero__subtitle" data-i18n="subtitle">Compositeur · Producteur · Paris</p>
-    </div>
-    <div class="hero__controls">
-      <a href="#about" class="hero__info" data-i18n="nav_info">Infos</a>
-      <button type="button" class="lang-toggle" id="langToggle" aria-label="Switch language">
-        <span data-lang-option="fr">FR</span><span class="lang-sep">/</span><span data-lang-option="en">EN</span>
-      </button>
-    </div>
-  </div>
-
-  <div class="hero__media">
-    <img class="hero__synth" src="assets/img/header-collage-1.png" alt="" aria-hidden="true">
-    <img class="hero__cable" src="assets/img/header-collage-3.png" alt="" aria-hidden="true">
-  </div>
-
-  <div class="hero__logo">
-    <span class="hero__logo-name">Constantin Ory-Lavollée</span>
-    <span class="hero__logo-role" data-i18n="subtitle">Compositeur · Producteur · Paris</span>
-  </div>
+  <h1 class="sr-only">Constantin Ory-Lavollée — Compositeur · Producteur · Paris</h1>
+  <img class="hero__img" src="assets/img/hero.png" fetchpriority="high"
+       alt="Constantin Ory-Lavollée — Compositeur · Producteur · Paris">
+  <a class="hero__info-hit" href="#about" aria-label="Infos" data-i18n-aria="nav_info"></a>
 </header>
 
 <main id="main">
@@ -153,7 +133,12 @@
 <footer class="site-footer">
   <img class="site-footer__deco site-footer__deco--synth" src="assets/img/footer-collage-1.png" alt="" aria-hidden="true">
   <img class="site-footer__deco site-footer__deco--cable" src="assets/img/footer-collage-2.png" alt="" aria-hidden="true">
-  <p class="site-footer__copy">© 2026 Constantin Ory-Lavollée</p>
+  <div class="site-footer__bar">
+    <p class="site-footer__copy">© 2026 Constantin Ory-Lavollée</p>
+    <button type="button" class="lang-toggle" id="langToggle" aria-label="Switch language">
+      <span data-lang-option="fr">FR</span><span class="lang-sep">/</span><span data-lang-option="en">EN</span>
+    </button>
+  </div>
 </footer>
 
 <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top" data-i18n-aria="back_to_top">TOP</button>
