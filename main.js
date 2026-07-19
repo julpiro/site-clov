@@ -37,6 +37,11 @@
     return "fr";
   }
 
+  function currentDict() {
+    var lang = document.documentElement.getAttribute("lang") || "fr";
+    return translations[lang] || translations.fr;
+  }
+
   function applyLang(lang) {
     var dict = translations[lang] || translations.fr;
     document.documentElement.setAttribute("lang", lang);
@@ -45,7 +50,6 @@
       var key = el.getAttribute("data-i18n");
       if (dict[key] !== undefined) el.textContent = dict[key];
     });
-
     document.querySelectorAll("[data-i18n-aria]").forEach(function (el) {
       var key = el.getAttribute("data-i18n-aria");
       if (dict[key] !== undefined) el.setAttribute("aria-label", dict[key]);
@@ -58,9 +62,9 @@
     if (backToTop) backToTop.setAttribute("aria-label", dict.back_to_top);
 
     document.querySelectorAll(".player").forEach(function (player) {
-      var btn = player.querySelector(".play-btn");
+      var btn = player.querySelector(".play-overlay");
       if (!btn || btn.disabled) return;
-      var isPlaying = btn.classList.contains("is-playing");
+      var isPlaying = player.classList.contains("is-playing");
       btn.setAttribute("aria-label", isPlaying ? dict.pause : dict.play);
     });
 
@@ -72,69 +76,77 @@
     if (!toggle) return;
     var current = detectDefaultLang();
     applyLang(current);
-
     toggle.addEventListener("click", function () {
       current = current === "fr" ? "en" : "fr";
       applyLang(current);
     });
   }
 
-  /* ---------------- Audio players ---------------- */
-  function initPlayers() {
-    var players = document.querySelectorAll(".player[data-audio]");
+  /* ---------------- Video + waveform players ---------------- */
+  function initPlayer(player) {
+    var video = player.querySelector(".player__video");
+    var waveformEl = player.querySelector(".waveform");
+    var btn = player.querySelector(".play-overlay");
+    var playIcon = player.querySelector(".icon--play");
+    var pauseIcon = player.querySelector(".icon--pause");
+    var peaksUrl = player.getAttribute("data-peaks");
+    var duration = parseFloat(player.getAttribute("data-duration")) || undefined;
 
-    players.forEach(function (player) {
-      var audioUrl = player.getAttribute("data-audio");
-      var waveformEl = player.querySelector(".waveform");
-      var btn = player.querySelector(".play-btn");
-      var playIcon = player.querySelector(".icon--play");
-      var pauseIcon = player.querySelector(".icon--pause");
+    if (!video || !waveformEl || !btn || typeof window.WaveSurfer === "undefined") return;
 
-      if (!waveformEl || !btn || typeof window.WaveSurfer === "undefined") return;
-
-      var wavesurfer = window.WaveSurfer.create({
+    function build(peaks) {
+      var options = {
         container: waveformEl,
-        waveColor: "#c9c9c9",
+        media: video,
+        waveColor: "#c4c4c4",
         progressColor: "#1e1e1e",
         cursorColor: "transparent",
         barWidth: 2,
-        barGap: 2,
+        barGap: 1,
         barRadius: 1,
-        height: 40,
-        normalize: true,
-        url: audioUrl
-      });
+        height: 56,
+        normalize: true
+      };
+      if (peaks) { options.peaks = [peaks]; options.duration = duration; }
 
-      function setPlayingState(isPlaying) {
-        btn.classList.toggle("is-playing", isPlaying);
+      var ws = window.WaveSurfer.create(options);
+
+      function setPlaying(isPlaying) {
+        player.classList.toggle("is-playing", isPlaying);
         if (playIcon) playIcon.hidden = isPlaying;
         if (pauseIcon) pauseIcon.hidden = !isPlaying;
-        var lang = document.documentElement.getAttribute("lang") || "fr";
-        var dict = translations[lang] || translations.fr;
-        btn.setAttribute("aria-label", isPlaying ? dict.pause : dict.play);
+        btn.setAttribute("aria-label", isPlaying ? currentDict().pause : currentDict().play);
       }
 
-      btn.addEventListener("click", function () {
-        wavesurfer.playPause();
-      });
+      btn.addEventListener("click", function () { ws.playPause(); });
+      ws.on("play", function () { setPlaying(true); });
+      ws.on("pause", function () { setPlaying(false); });
+      ws.on("finish", function () { setPlaying(false); });
+    }
 
-      wavesurfer.on("play", function () { setPlayingState(true); });
-      wavesurfer.on("pause", function () { setPlayingState(false); });
-      wavesurfer.on("finish", function () { setPlayingState(false); });
-    });
+    if (peaksUrl) {
+      fetch(peaksUrl)
+        .then(function (r) { return r.json(); })
+        .then(function (json) { build(json.data || json); })
+        .catch(function () { build(null); });
+    } else {
+      build(null);
+    }
+  }
+
+  function initPlayers() {
+    document.querySelectorAll(".player[data-peaks]").forEach(initPlayer);
   }
 
   /* ---------------- Back to top ---------------- */
   function initBackToTop() {
     var btn = document.getElementById("backToTop");
     if (!btn) return;
-
     function onScroll() {
       btn.classList.toggle("is-visible", window.scrollY > window.innerHeight * 0.6);
     }
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
-
     btn.addEventListener("click", function () {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });

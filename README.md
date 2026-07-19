@@ -31,18 +31,23 @@ originals/            Raw, uncompressed source media (git-ignored, kept locally 
 ## Adding the remaining project videos
 
 Two of the three project players (**Inani** and **-1.75**) are placeholders waiting on
-their source video. To wire one up once you have the mp4:
+their source video. Each player shows a `<video>` with the play button overlaid, and a
+`wavesurfer.js` waveform underneath that is synced to the video and drawn from a
+precomputed peaks file. To wire one up once you have the mp4:
 
 1. Drop the file in `originals/` (e.g. `originals/inani.mp4`).
-2. Extract a compressed audio track and re-encode the video for web:
+2. Re-encode the video for web, then generate the waveform peaks:
    ```bash
-   ffmpeg -i originals/inani.mp4 -vn -acodec libmp3lame -q:a 3 assets/media/inani.mp3
-   ffmpeg -i originals/inani.mp4 -c:v libx264 -crf 26 -preset slow -c:a aac -b:a 128k -movflags +faststart assets/media/inani.mp4
+   ffmpeg -i originals/inani.mp4 -c:v libx264 -crf 26 -preset slow -vf scale=896:-2 \
+     -c:a aac -b:a 128k -movflags +faststart assets/media/inani.mp4
+   node tools/gen-peaks.mjs assets/media/inani.mp4 assets/media/inani.peaks.json 1000
    ```
-3. In `index.html`, on that project's `.player` element, add `data-audio="assets/media/inani.mp3"`,
-   swap in the real project image, remove the `disabled` attribute from its `.play-btn`, and
-   remove the `data-i18n-aria="coming_soon"` attribute. `main.js` will automatically pick up
-   the new `data-audio` player and wire the waveform + play button.
+3. In `index.html`, on that project's `.player`, add
+   `data-peaks="assets/media/inani.peaks.json"` and `data-duration="<seconds>"`, put a
+   `<source src="assets/media/inani.mp4" type="video/mp4">` inside its `<video>`, replace the
+   static waveform (`.waveform-static` / `.waveform-bars`) with `<div class="waveform"></div>`,
+   and make the overlay button active (remove `disabled`, `is-disabled`, the `player__note`,
+   and `data-i18n-aria`). `main.js` picks up any `.player[data-peaks]` automatically.
 
 ## Local preview
 

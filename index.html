@@ -13,18 +13,17 @@
 <a class="skip-link" href="#main">Skip to content</a>
 
 <header class="hero">
-  <img class="hero__deco hero__deco--violin" src="assets/img/header-collage-2.png" alt="" aria-hidden="true">
-  <img class="hero__deco hero__deco--cable" src="assets/img/header-collage-3.png" alt="" aria-hidden="true">
-  <img class="hero__deco hero__deco--synth" src="assets/img/header-collage-1.png" alt="" aria-hidden="true">
+  <div class="hero__bg" aria-hidden="true">
+    <img class="hero__cable" src="assets/img/header-collage-3.png" alt="">
+    <img class="hero__synth" src="assets/img/header-collage-1.png" alt="">
+    <img class="hero__violin" src="assets/img/header-collage-2.png" alt="">
+  </div>
 
-  <div class="hero__top">
-    <span class="hero__name-mark">Constantin Ory-Lavollée</span>
-    <div class="hero__controls">
-      <a href="#about" class="hero__info-link" data-i18n="nav_info">Infos</a>
-      <button type="button" class="lang-toggle" id="langToggle" aria-label="Switch language">
-        <span data-lang-option="fr">FR</span><span class="lang-sep">/</span><span data-lang-option="en">EN</span>
-      </button>
-    </div>
+  <div class="hero__topbar">
+    <a href="#about" class="hero__info" data-i18n="nav_info">Infos</a>
+    <button type="button" class="lang-toggle" id="langToggle" aria-label="Switch language">
+      <span data-lang-option="fr">FR</span><span class="lang-sep">/</span><span data-lang-option="en">EN</span>
+    </button>
   </div>
 
   <div class="hero__title-block">
@@ -46,72 +45,68 @@
 <main id="main">
 
   <section class="project" id="inani" aria-labelledby="inani-title">
-    <div class="project__media">
+    <div class="wrap">
       <div class="player" data-project="inani">
-        <div class="player__image">
-          <img src="assets/img/project-inani.png" alt="Inani — concept hardware brand ad spot">
-        </div>
-        <div class="player__bar player__bar--static">
-          <button type="button" class="play-btn" disabled aria-label="Play" data-i18n-aria="coming_soon">
+        <div class="player__stage">
+          <video class="player__video" playsinline preload="none" poster="assets/img/project-inani.png"></video>
+          <button type="button" class="play-overlay is-disabled" disabled aria-label="Video coming soon" data-i18n-aria="coming_soon">
             <svg class="icon icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
           </button>
-          <img class="waveform-static" src="assets/img/waveform-inani.png" alt="" aria-hidden="true">
           <span class="player__note" data-i18n="coming_soon">Vidéo à venir</span>
         </div>
+        <img class="waveform-static" src="assets/img/waveform-inani.png" alt="" aria-hidden="true">
       </div>
-    </div>
-    <div class="project__text">
-      <h2 class="project__title" id="inani-title">Inani</h2>
-      <p class="project__desc">Inani is a concept hardware brand created by art director Camille Vercken de Vreuschmen. I composed the music and designed the sound for its ad spot, working with hardware synthesizers, samples and effects.</p>
+      <div class="project__row">
+        <h2 class="project__title" id="inani-title">Inani</h2>
+        <p class="project__desc">Inani is a concept hardware brand created by art director Camille Vercken de Vreuschmen. I composed the music and designed the sound for its ad spot, working with hardware synthesizers, samples and effects.</p>
+      </div>
     </div>
   </section>
 
   <section class="project" id="ormeau" aria-labelledby="ormeau-title">
-    <div class="project__media">
-      <div class="player" data-project="ormeau" data-audio="assets/media/ormeau.mp3">
-        <div class="player__image">
-          <img src="assets/img/project-ormeau.png" alt="Ormeau — short film by Juliette Roux">
-        </div>
-        <div class="player__bar">
-          <button type="button" class="play-btn" aria-label="Play">
+    <div class="wrap">
+      <div class="player" data-project="ormeau" data-peaks="assets/media/ormeau.peaks.json" data-duration="151.32">
+        <div class="player__stage">
+          <video class="player__video" playsinline preload="metadata" poster="assets/img/project-ormeau.png">
+            <source src="assets/media/ormeau.mp4" type="video/mp4">
+          </video>
+          <button type="button" class="play-overlay" aria-label="Play">
             <svg class="icon icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
             <svg class="icon icon--pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
           </button>
-          <div class="waveform" aria-hidden="true"></div>
         </div>
+        <div class="waveform" aria-hidden="true"></div>
       </div>
-    </div>
-    <div class="project__text">
-      <h2 class="project__title" id="ormeau-title">Ormeau</h2>
-      <p class="project__desc">Ormeau is a short film directed by Juliette Roux, for which I did the sound design, ambient effects, and vocal processing. The film evokes the memory of a forgotten society, so I built an ethereal, atmospheric soundscape from layered pads, white noise, and richly textured field recordings to conjure a hazy, dreamlike mood.</p>
+      <div class="project__row">
+        <h2 class="project__title" id="ormeau-title">Ormeau</h2>
+        <p class="project__desc">Ormeau is a short film directed by Juliette Roux, for which I did the sound design, ambient effects, and vocal processing. The film evokes the memory of a forgotten society, so I built an ethereal, atmospheric soundscape from layered pads, white noise, and richly textured field recordings to conjure a hazy, dreamlike mood.</p>
+      </div>
     </div>
   </section>
 
   <section class="project" id="project-175" aria-labelledby="p175-title">
-    <div class="project__media">
+    <div class="wrap">
       <div class="player" data-project="175">
-        <div class="player__image player__image--placeholder">
-          <span class="placeholder-label">-1.75</span>
-        </div>
-        <div class="player__bar player__bar--static">
-          <button type="button" class="play-btn" disabled aria-label="Play" data-i18n-aria="coming_soon">
+        <div class="player__stage">
+          <video class="player__video player__video--placeholder" playsinline preload="none"></video>
+          <button type="button" class="play-overlay is-disabled" disabled aria-label="Video coming soon" data-i18n-aria="coming_soon">
             <svg class="icon icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
           </button>
-          <div class="waveform-bars" aria-hidden="true">
-            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-          </div>
           <span class="player__note" data-i18n="coming_soon">Vidéo à venir</span>
         </div>
+        <div class="waveform-bars" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
       </div>
-    </div>
-    <div class="project__text">
-      <h2 class="project__title" id="p175-title">-1.75</h2>
-      <p class="project__desc">Original music for -1.75, a seven-part photography project by Jeanne Seurot. I composed three pieces designed as immersions into the images. The project unfolds across seven editions, each with its own visual atmosphere, so I responded with three hybrid tracks, woven from natural sounds and field ambiences, that give a narrative frame to the journey through the photographs.</p>
+      <div class="project__row">
+        <h2 class="project__title" id="p175-title">-1.75</h2>
+        <p class="project__desc">Original music for -1.75, a seven-part photography project by Jeanne Seurot. I composed three pieces designed as immersions into the images. The project unfolds across seven editions, each with its own visual atmosphere, so I responded with three hybrid tracks, woven from natural sounds and field ambiences, that give a narrative frame to the journey through the photographs.</p>
+      </div>
     </div>
   </section>
 
   <section class="project project--ananas" id="ananas" aria-labelledby="ananas-title">
-    <div class="project__media">
+    <div class="wrap">
       <div class="spotify-embed">
         <iframe
           title="Ananas Service — Eutrop ft. Clov, on Spotify"
@@ -120,33 +115,37 @@
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"></iframe>
       </div>
-    </div>
-    <div class="project__text">
-      <h2 class="project__title" id="ananas-title">Ananas Service</h2>
-      <p class="project__desc">Album ft. Eutrop</p>
-      <a class="spotify-cta" href="https://open.spotify.com/intl-fr/album/4eR5RVyW3dPh3Ty0BpwPrK" target="_blank" rel="noopener" data-i18n="spotify_cta">Écouter sur Spotify</a>
+      <div class="project__row">
+        <h2 class="project__title" id="ananas-title">Ananas Service</h2>
+        <p class="project__desc">
+          Album ft. Eutrop.
+          <a class="spotify-cta" href="https://open.spotify.com/intl-fr/album/4eR5RVyW3dPh3Ty0BpwPrK" target="_blank" rel="noopener" data-i18n="spotify_cta">Écouter sur Spotify</a>
+        </p>
+      </div>
     </div>
   </section>
 
   <section class="about" id="about" aria-labelledby="about-title">
-    <div class="about__photo">
-      <img src="assets/img/contact-photo.png" alt="Constantin Ory-Lavollée in his home studio">
-    </div>
-    <div class="about__content">
-      <h2 class="about__title" id="about-title" data-i18n="nav_info">Infos</h2>
-      <p class="about__bio" data-i18n="bio">Bienvenue dans mon portfolio. Je m’appelle Constantin. En tant que compositeur et producteur, je travaille sur divers projets originaux : supervision musicale, compositions et arrangements pour d’autres musiciens. Je travaille essentiellement avec des synthétiseurs, mon violon et le logiciel Ableton, avec une prédilection pour la manipulation de samples. Ma double formation en management et en musicologie me permet de penser les projets musicaux sur leurs deux fronts : l’exigence artistique et les enjeux stratégiques d’une commande. N’hésitez pas à me contacter pour toute question ou envie de collaboration.</p>
+    <div class="wrap about__wrap">
+      <div class="about__photo">
+        <img src="assets/img/contact-photo.png" alt="Constantin Ory-Lavollée in his home studio">
+      </div>
+      <div class="about__content">
+        <h2 class="about__title" id="about-title" data-i18n="nav_info">Infos</h2>
+        <p class="about__bio" data-i18n="bio">Bienvenue dans mon portfolio. Je m’appelle Constantin. En tant que compositeur et producteur, je travaille sur divers projets originaux : supervision musicale, compositions et arrangements pour d’autres musiciens. Je travaille essentiellement avec des synthétiseurs, mon violon et le logiciel Ableton, avec une prédilection pour la manipulation de samples. Ma double formation en management et en musicologie me permet de penser les projets musicaux sur leurs deux fronts : l’exigence artistique et les enjeux stratégiques d’une commande. N’hésitez pas à me contacter pour toute question ou envie de collaboration.</p>
 
-      <div class="about__grid">
-        <div class="about__block">
-          <h3 data-i18n="education_label">Formation</h3>
-          <p>ESSEC Business School — Master in Management<br><span class="dim">2021–2025</span></p>
-          <p>ENS Ulm — Musicologie<br><span class="dim">2025–2027</span></p>
-        </div>
-        <div class="about__block">
-          <h3 data-i18n="contact_label">Contact</h3>
-          <p><a href="mailto:constantinorylavollee@gmail.com">constantinorylavollee@gmail.com</a></p>
-          <p><a href="https://instagram.com/clovvvv_" target="_blank" rel="noopener">@clovvvv_</a></p>
-          <p><a href="https://www.linkedin.com/in/constantin-ory-lavollée" target="_blank" rel="noopener">LinkedIn</a></p>
+        <div class="about__grid">
+          <div class="about__block">
+            <h3 data-i18n="education_label">Formation</h3>
+            <p>ESSEC Business School — Master in Management<br><span class="dim">2021–2025</span></p>
+            <p>ENS Ulm — Musicologie<br><span class="dim">2025–2027</span></p>
+          </div>
+          <div class="about__block">
+            <h3 data-i18n="contact_label">Contact</h3>
+            <p><a href="mailto:constantinorylavollee@gmail.com">constantinorylavollee@gmail.com</a></p>
+            <p><a href="https://instagram.com/clovvvv_" target="_blank" rel="noopener">@clovvvv_</a></p>
+            <p><a href="https://www.linkedin.com/in/constantin-ory-lavollée" target="_blank" rel="noopener">LinkedIn</a></p>
+          </div>
         </div>
       </div>
     </div>
